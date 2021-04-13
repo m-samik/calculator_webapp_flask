@@ -2,14 +2,14 @@ from flask import Flask, render_template, request
 app = Flask("mytest")
 
 
-@app.route('/')
+@app.route('/home')
 def home():
     return "<b> My Home Page </b>"
 
 
-@app.route('/survey')
+@app.route('/')
 def form():
-    formrender = render_template("survey.html")
+    formrender = render_template("calci.html")
     return formrender
 
 # Get Request Method
@@ -21,7 +21,7 @@ def form():
 #         return data
 
 
-@app.route('/req', methods=['POST'])
+@app.route('/answer', methods=['POST'])
 def req():
     if request.method == "POST":
         data = request.form.get("name")
@@ -37,7 +37,7 @@ def req():
         elif operend == "div":
             number = int(num1) / int(num2)
         formrender = render_template(
-            "survey.html", value=str(number), name=data)
+            "calci.html", value=str(number), name=data)
         print(data)
         return formrender
 
